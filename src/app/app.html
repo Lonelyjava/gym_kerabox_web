@@ -1,780 +1,333 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Kerabox Gym | Build Your Strength</title>
-	<!--  <link rel="stylesheet" href="style.css">
-	Font Awesome for Icons
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> -->
-</head>
-<style>
-	/* --- RESET & VARIABLES --- */
-	:root {
-		--primary: #ccff00;
-		/* Neon Green */
-		--dark: #1a1a1a;
-		--darker: #111111;
-		--light: #f4f4f4;
-		--gray: #333;
-		--font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-	}
-
-	* {
-		margin: 0;
-		padding: 0;
-		box-sizing: border-box;
-		text-decoration: none;
-		list-style: none;
-		font-family: var(--font-main);
-	}
-
-	body {
-		background-color: var(--dark);
-		color: var(--light);
-		line-height: 1.6;
-	}
-
-	/* --- UTILITIES --- */
-	.container {
-		max-width: 1100px;
-		margin: 0 auto;
-		padding: 0 20px;
-	}
-
-	.section-padding {
-		padding: 80px 0;
-	}
-
-	.bg-dark {
-		background-color: #222;
-	}
-
-	.section-title {
-		text-align: center;
-		font-size: 2.5rem;
-		margin-bottom: 50px;
-		text-transform: uppercase;
-	}
-
-	.section-title span {
-		color: var(--primary);
-	}
-
-	/* --- BUTTONS --- */
-	.btn-main {
-		display: inline-block;
-		background: var(--primary);
-		color: var(--darker);
-		padding: 12px 30px;
-		border-radius: 5px;
-		font-weight: bold;
-		transition: 0.3s;
-		border: none;
-		cursor: pointer;
-	}
-
-	.btn-main:hover {
-		background: #fff;
-		transform: translateY(-2px);
-	}
-
-	.btn-outline {
-		display: inline-block;
-		border: 2px solid var(--primary);
-		color: var(--primary);
-		padding: 10px 30px;
-		border-radius: 5px;
-		font-weight: bold;
-		transition: 0.3s;
-		background: transparent;
-		cursor: pointer;
-	}
-
-	.btn-outline:hover {
-		background: var(--primary);
-		color: var(--darker);
-	}
-
-	/* --- NAVIGATION --- */
-	.navbar {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		padding: 20px 5%;
-		background: rgba(0, 0, 0, 0.9);
-		position: fixed;
-		width: 100%;
-		top: 0;
-		z-index: 1000;
-		backdrop-filter: blur(10px);
-	}
-
-	.logo {
-		font-size: 1.8rem;
-		font-weight: bold;
-		color: var(--light);
-	}
-
-	.logo span {
-		color: var(--primary);
-	}
-
-	.nav-links {
-		display: flex;
-		gap: 30px;
-	}
-
-	.nav-links a {
-		color: var(--light);
-		font-weight: 500;
-		transition: 0.3s;
-	}
-
-	.nav-links a:hover {
-		color: var(--primary);
-	}
-
-	.btn-nav {
-		background: var(--primary);
-		color: var(--darker) !important;
-		padding: 8px 20px;
-		border-radius: 4px;
-		font-weight: bold;
-	}
-
-	.hamburger {
-		display: none;
-		font-size: 1.5rem;
-		cursor: pointer;
-	}
-
-	/* --- HERO SECTION --- */
-	.hero {
-		height: 100vh;
-		background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-			url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
-		background-size: cover;
-		background-position: center;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		text-align: center;
-		margin-top: 60px;
-	}
-
-	.hero h1 {
-		font-size: 3.5rem;
-		margin-bottom: 20px;
-	}
-
-	.hero p {
-		font-size: 1.2rem;
-		margin-bottom: 30px;
-		max-width: 600px;
-		margin-left: auto;
-		margin-right: auto;
-	}
-
-	.highlight {
-		color: var(--primary);
-	}
-
-	/* --- ABOUT --- */
-	.about-grid {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 40px;
-		align-items: center;
-	}
-
-	.stats {
-		display: flex;
-		justify-content: space-around;
-		text-align: center;
-	}
-
-	.stat-box h3 {
-		font-size: 2.5rem;
-		color: var(--primary);
-	}
-
-	.stat-box p {
-		font-size: 1.1rem;
-		font-weight: bold;
-	}
-
-	/* --- CLASSES --- */
-	.class-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-		gap: 30px;
-	}
-
-	.class-card {
-		background: var(--dark);
-		padding: 30px;
-		border-radius: 10px;
-		text-align: center;
-		transition: 0.3s;
-		border: 1px solid #333;
-	}
-
-	.class-card:hover {
-		transform: translateY(-10px);
-		border-color: var(--primary);
-	}
-
-	.class-card i {
-		font-size: 3rem;
-		color: var(--primary);
-		margin-bottom: 20px;
-	}
-
-	.class-card h3 {
-		margin-bottom: 15px;
-	}
-
-	/* --- PRICING --- */
-	.pricing-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-		gap: 30px;
-	}
-
-	.price-card {
-		background: #222;
-		padding: 40px;
-		border-radius: 10px;
-		text-align: center;
-		border: 1px solid #333;
-	}
-
-	.price-card.popular {
-		border: 2px solid var(--primary);
-		position: relative;
-	}
-
-	#contact {
-		background-color: #222;
-	}
-
-	.contact-form {
-		max-width: 600px;
-		margin: 0 auto;
-		display: flex;
-		flex-direction: column;
-		gap: 20px;
-	}
-
-	.contact-form input,
-	.contact-form textarea {
-		width: 100%;
-		padding: 15px 20px;
-		border-radius: 5px;
-		border: 2px solid #333;
-		background-color: #1a1a1a;
-		color: #f4f4f4;
-		font-size: 1rem;
-		transition: 0.3s;
-		outline: none;
-	}
-
-	.contact-form input,
-	.contact-form textarea {
-		width: 100%;
-		padding: 15px 20px;
-		border-radius: 5px;
-		border: 2px solid #333;
-		background-color: #1a1a1a;
-		color: #f4f4f4;
-		font-size: 1rem;
-		transition: 0.3s;
-		outline: none;
-	}
-	/* ABOUT OWNER SECTION STYLES */
-.about-owner-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: clamp(40px, 8vw, 60px);
-    align-items: center;
-    margin-top: clamp(20px, 4vw, 40px);
-}
-
-@media (min-width: 768px) {
-    .about-owner-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-}
-
-/* OWNER IMAGE - CIRCULAR */
-.owner-image-container {
-    position: relative;
-    display: flex;
-    justify-content: center;
-}
-
-.owner-image {
-    position: relative;
-    width: clamp(280px, 50vw, 380px);
-    height: clamp(280px, 50vw, 380px);
-    border-radius: 50%;
-    overflow: hidden;
-    box-shadow: 
-        0 25px 50px rgba(0,0,0,0.4),
-        0 0 0 8px rgba(204,255,0,0.2),
-        inset 0 4px 20px rgba(0,0,0,0.3);
-    transition: var(--transition);
-    cursor: pointer;
-}
-
-.owner-image:hover {
-    transform: scale(1.05) rotate(2deg);
-    box-shadow: 
-        0 35px 70px rgba(0,0,0,0.5),
-        0 0 0 12px rgba(204,255,0,0.3),
-        inset 0 4px 20px rgba(0,0,0,0.4);
-}
-
-.owner-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: var(--transition);
-}
-
-.owner-image:hover img {
-    transform: scale(1.1);
-}
-
-/* IMAGE OVERLAY */
-.image-overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    background: linear-gradient(45deg, var(--primary), var(--primary-dark));
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--darker);
-    font-size: 1.8rem;
-    transition: var(--transition);
-    box-shadow: 0 10px 30px rgba(204,255,0,0.5);
-}
-
-.owner-image:hover .image-overlay {
-    transform: translate(-50%, -50%) scale(1);
-}
-
-/* OWNER CONTENT */
-.owner-content {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(25px, 5vw, 35px);
-}
-
-.owner-badge {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    text-align: center;
-    padding: clamp(20px, 5vw, 30px);
-    background: rgba(204,255,0,0.08);
-    border: 2px solid rgba(204,255,0,0.2);
-    border-radius: 20px;
-}
-
-.owner-badge i {
-    font-size: clamp(2rem, 6vw, 2.8rem);
-    color: var(--primary);
-    text-shadow: 0 0 20px rgba(204,255,0,0.5);
-}
-
-.owner-badge h4 {
-    font-size: clamp(1.4rem, 3.5vw, 2rem);
-    font-weight: 700;
-    color: var(--primary);
-    margin: 0;
-}
-
-.owner-description {
-    font-size: clamp(1rem, 2.5vw, 1.2rem);
-    line-height: 1.8;
-    color: var(--text-muted);
-    margin: 0;
-    padding: clamp(20px, 5vw, 30px);
-    background: rgba(255,255,255,0.03);
-    border-radius: 16px;
-    border-left: 4px solid var(--primary);
-}
-
-/* OWNER STATS */
-.owner-stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 20px;
-    margin: clamp(20px, 4vw, 30px) 0;
-}
-
-.stat-item {
-    text-align: center;
-    padding: 20px 15px;
-    background: rgba(255,255,255,0.05);
-    border-radius: 16px;
-    transition: var(--transition);
-}
-
-.stat-item:hover {
-    background: rgba(204,255,0,0.1);
-    transform: translateY(-5px);
-}
-
-.stat-item h3 {
-    font-size: clamp(1.8rem, 6vw, 2.8rem);
-    color: var(--primary);
-    font-weight: 800;
-    margin-bottom: 8px;
-}
-
-.stat-item p {
-    font-size: clamp(0.9rem, 2vw, 1.1rem);
-    color: var(--text-muted);
-    font-weight: 500;
-}
-
-/* OWNER BUTTONS */
-.owner-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(15px, 3vw, 20px);
-}
-
-@media (min-width: 768px) {
-    .owner-buttons {
-        flex-direction: row;
-        justify-content: center;
-    }
-}
-
-/* RESPONSIVE ADJUSTMENTS */
-@media (max-width: 480px) {
-    .owner-image {
-        margin: 0 auto 30px;
-    }
-    
-    .owner-badge {
-        flex-direction: row;
-        justify-content: center;
-        text-align: center;
-    }
-}
-
-/* ANIMATION ON SCROLL */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(40px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.owner-image-container,
-.owner-content {
-    animation: fadeInUp 0.8s ease forwards;
-    opacity: 0;
-}
-
-.owner-image-container.animate,
-.owner-content.animate {
-    opacity: 1;
-    animation-play-state: running;
-}
-/* GYM MEMBERS SECTION STYLES */
-.section-subtitle {
-    text-align: center;
-    font-size: clamp(1.1rem, 3vw, 1.4rem);
-    color: var(--text-muted);
-    margin-bottom: clamp(40px, 8vw, 70px);
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* MEMBERS GALLERY GRID */
-.members-gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: clamp(25px, 5vw, 40px);
-    margin-bottom: clamp(50px, 10vw, 80px);
-}
-
-@media (min-width: 1024px) {
-    .members-gallery {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-/* MEMBER CARD */
-.member-card {
-    background: rgba(255,255,255,0.05);
-    border-radius: 24px;
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.1);
-    transition: var(--transition);
-    backdrop-filter: blur(10px);
-    position: relative;
-    cursor: pointer;
-}
-
-.member-card:hover {
-    transform: translateY(-12px);
-    border-color: var(--primary);
-    box-shadow: var(--shadow-hover);
-}
-
-.member-card.featured {
-    grid-column: span 1;
-}
-
-@media (min-width: 1024px) {
-    .member-card.featured {
-        grid-column: span 2;
-        max-width: 700px;
-        margin: 0 auto;
-    }
-}
-
-/* MEMBER IMAGE */
-.member-image {
-    position: relative;
-    height: clamp(220px, 35vw, 280px);
-    overflow: hidden;
-}
-
-.member-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: var(--transition);
-}
-
-.member-card:hover .member-image img {
-    transform: scale(1.1);
-}
-
-/* MEMBER OVERLAY */
-.member-overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    background: linear-gradient(45deg, var(--primary), var(--primary-dark));
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--darker);
-    font-size: 1.5rem;
-    transition: var(--transition);
-    box-shadow: 0 10px 30px rgba(204,255,0,0.6);
-}
-
-.member-card:hover .member-overlay {
-    transform: translate(-50%, -50%) scale(1);
-}
-
-/* MEMBER INFO */
-.member-info {
-    padding: clamp(25px, 6vw, 35px);
-    position: relative;
-}
-
-.member-badge {
-    position: absolute;
-    top: -15px;
-    left: 20px;
-    background: var(--primary);
-    color: var(--darker);
-    padding: 8px 20px;
-    border-radius: 25px;
-    font-size: clamp(0.8rem, 2vw, 0.95rem);
-    font-weight: 700;
-    box-shadow: 0 8px 25px rgba(204,255,0,0.4);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.featured-badge {
-    background: linear-gradient(45deg, var(--primary), var(--primary-dark)) !important;
-    padding: 12px 24px !important;
-    font-size: clamp(0.9rem, 2.2vw, 1.1rem) !important;
-}
-
-.featured-badge i {
-    font-size: 1.2rem;
-}
-
-.member-info h4 {
-    font-size: clamp(1.3rem, 3.5vw, 1.8rem);
-    font-weight: 700;
-    margin-bottom: 12px;
-    color: var(--light);
-}
-
-.member-info p {
-    color: var(--text-muted);
-    font-size: clamp(0.95rem, 2.3vw, 1.1rem);
-    line-height: 1.7;
-    margin-bottom: 20px;
-}
-
-/* MEMBER STATS */
-.member-stats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    font-size: clamp(0.85rem, 2vw, 1rem);
-}
-
-.member-stats span {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    color: var(--text-muted);
-}
-
-.member-stats i {
-    color: var(--primary);
-    font-size: 1rem;
-    width: 16px;
-}
-
-/* JOIN CTA */
-.join-cta {
-    text-align: center;
-    padding: clamp(40px, 8vw, 60px);
-    background: rgba(255,255,255,0.03);
-    border-radius: 24px;
-    border: 1px solid var(--border-light);
-    backdrop-filter: blur(10px);
-    margin-top: clamp(30px, 6vw, 50px);
-}
-
-.join-cta h3 {
-    font-size: clamp(1.4rem, 4vw, 2.2rem);
-    margin-bottom: clamp(20px, 4vw, 30px);
-    color: var(--light);
-}
-
-.join-cta .btn {
-    min-width: 220px;
-}
-
-/* RESPONSIVE ADJUSTMENTS */
-@media (max-width: 480px) {
-    .members-gallery {
-        grid-template-columns: 1fr;
-        gap: 25px;
-    }
-    
-    .member-card.featured {
-        grid-column: span 1;
-        max-width: none;
-    }
-    
-    .member-stats {
-        justify-content: center;
-    }
-}
-
-/* SCROLL ANIMATIONS */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.member-card {
-    opacity: 0;
-    transform: translateY(50px);
-    transition: all 0.6s ease;
-}
-
-.member-card.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-</style>
-<!-- <script>
-	// Scroll Animation for Owner Section
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('animate');
-        }
-    });
-}, observerOptions);
-
-// Observe owner section elements
-document.addEventListener('DOMContentLoaded', () => {
-    const ownerElements = document.querySelectorAll('.owner-image-container, .owner-content');
-    ownerElements.forEach(el => observer.observe(el));
-});
-// Members Gallery Scroll Animation
-const memberObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-            setTimeout(() => {
-                entry.target.classList.add('visible');
-            }, index * 100);
-        }
-    });
-}, { threshold: 0.1 });
-
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.member-card').forEach(card => {
-        memberObserver.observe(card);
-    });
-});
-	</script> -->
-<body>
+	<!-- Navigation -->
+	<nav class="navbar">
+		<div class="logo">Kerabox<span>GYM</span></div>
+		<ul class="nav-links">
+			<li><a href="#home">Home</a></li>
+			<li><a href="#about">About</a></li>
+			<li><a href="#classes">Classes</a></li>
+			<li><a href="#pricing">Pricing</a></li>
+			<li><a href="#gallery">Gallery</a></li>
+			<li><a href="#contact" class="btn-nav">Join Now</a></li>
+		</ul>
+		<div class="hamburger">
+			<i class="fas fa-bars"></i>
+		</div>
+	</nav>
+
+	<!-- Hero Section -->
+	<section id="home" class="hero">
+		<div class="hero-content">
+			<h1>Unlock Your <span class="highlight">True Potential</span></h1>
+			<p>State-of-the-art equipment, expert trainers, and a community that pushes you to be your best.</p>
+			<a href="#pricing" class="btn-main">Start Your Journey</a>
+		</div>
+	</section>
+
+	<!-- About Section -->
+	<section id="about" class="section-padding">
+		<div class="container">
+			<h2 class="section-title">Who We Are</h2>
+			<div class="about-grid">
+				<div class="about-text">
+					<p>At Kerabox, we believe fitness is not just a hobby—it's a lifestyle. We provide a welcoming
+						environment for beginners and pros alike. Whether you want to lose weight, build muscle, or
+						compete in athletics, we have the tools to help you succeed.</p>
+				</div>
+				<div class="stats">
+					<div class="stat-box">
+						<h3>500+</h3>
+						<p>Members</p>
+					</div>
+					<div class="stat-box">
+						<h3>20+</h3>
+						<p>Trainers</p>
+					</div>
+					<div class="stat-box">
+						<h3>10+</h3>
+						<p>Classes</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</section>
+
+	<section id="about" class="section-padding">
+    <div class="container">
+        <h2 class="section-title">Meet Our Founder <span>& Owner</span></h2>
+        <div class="about-owner-grid">
+            <!-- Owner Image - Circular -->
+            <div class="owner-image-container">
+                <div class="owner-image">
+                    <img src="yogi.jpg" alt="Owner - Yogi">
+                    <div class="image-overlay">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Owner Description -->
+            <div class="owner-content">
+                <div class="owner-badge">
+                    <i class="fas fa-crown"></i>
+                    <span>Yogi</span>
+                    <h4>Founder</h4>
+                </div>
+                <p class="owner-description">
+                    With over <strong>8+ years</strong> of fitness industry experience, Rohit Sharma founded Kerabox Gym to create a space where everyone can achieve their fitness dreams. A certified personal trainer and competitive bodybuilder, Rohit has trained thousands of clients and built a reputation for delivering real results.
+                </p>
+                <div class="owner-stats">
+                    <div class="stat-item">
+                        <h3>15+</h3>
+                        <p>Years Experience</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>5K+</h3>
+                        <p>Clients Trained</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>50+</h3>
+                        <p>Awards Won</p>
+                    </div>
+                </div>
+                <div class="owner-buttons">
+                    <a href="#contact" class="btn btn-outline">Book Consultation</a>
+                    <a href="#gallery" class="btn btn-outline">View Gallery</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="about" class="section-padding">
+    <div class="container">
+        <h2 class="section-title">Our <span>Amazing Members</span></h2>
+        <p class="section-subtitle">Real people, real transformations. Meet some of our success stories.</p>
+        
+        <!-- Members Gallery Grid -->
+        <div class="members-gallery">
+            <!-- Member 1 -->
+            <div class="member-card">
+                <div class="member-image">
+                    <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Sarah Johnson">
+                    <div class="member-overlay">
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="member-info">
+                    <div class="member-badge">
+                        <span class="transformation-badge">Lost 25kg</span>
+                    </div>
+                    <h4>Sarah Johnson</h4>
+                    <p>"From couch to confident! Kerabox changed my life completely."</p>
+                    <div class="member-stats">
+                        <span><i class="fas fa-clock"></i> 6 Months</span>
+                        <span><i class="fas fa-dumbbell"></i> Beginner</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Member 2 -->
+            <div class="member-card featured">
+                <div class="member-image">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Mike Patel">
+                    <div class="member-overlay">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                </div>
+                <div class="member-info">
+                    <div class="member-badge featured-badge">
+                        <i class="fas fa-crown"></i>
+                        <span>Top Transformer</span>
+                    </div>
+                    <h4>Mike Patel</h4>
+                    <p>"Gained 15kg muscle in 4 months. Best decision ever!"</p>
+                    <div class="member-stats">
+                        <span><i class="fas fa-clock"></i> 4 Months</span>
+                        <span><i class="fas fa-fire"></i> Advanced</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Member 3 -->
+            <div class="member-card">
+                <div class="member-image">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Priya Singh">
+                    <div class="member-overlay">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                </div>
+                <div class="member-info">
+                    <div class="member-badge">
+                        <span>Half Marathon</span>
+                    </div>
+                    <h4>Priya Singh</h4>
+                    <p>"Completed my first half marathon! The trainers are incredible."</p>
+                    <div class="member-stats">
+                        <span><i class="fas fa-clock"></i> 8 Months</span>
+                        <span><i class="fas fa-running"></i> Runner</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Member 4 -->
+            <div class="member-card">
+                <div class="member-image">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Raj Kumar">
+                    <div class="member-overlay">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                </div>
+                <div class="member-info">
+                    <div class="member-badge">
+                        <span>Won Competition</span>
+                    </div>
+                    <h4>Raj Kumar</h4>
+                    <p>"1st place in local bodybuilding competition. Thank you Kerabox!"</p>
+                    <div class="member-stats">
+                        <span><i class="fas fa-clock"></i> 12 Months</span>
+                        <span><i class="fas fa-medal"></i> Competitor</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Join CTA -->
+        <div class="join-cta">
+            <h3>Ready to be our next success story?</h3>
+            <a href="#pricing" class="btn btn-outline">Start Your Transformation</a>
+        </div>
+    </div>
+</section>
+
+	<!-- Classes Section -->
+	<section id="classes" class="section-padding bg-dark">
+		<div class="container">
+			<h2 class="section-title">Our Classes</h2>
+			<div class="class-grid">
+				<div class="class-card">
+					<i class="fas fa-dumbbell"></i>
+					<h3>Weight Training</h3>
+					<p>Build muscle and strength with our free weights and machines.</p>
+				</div>
+				<div class="class-card">
+					<i class="fas fa-running"></i>
+					<h3>HIIT Cardio</h3>
+					<p>High-intensity interval training to burn fat fast.</p>
+				</div>
+				<div class="class-card">
+					<i class="fas fa-person-praying"></i>
+					<h3>Yoga & Pilates</h3>
+					<p>Improve flexibility and core strength.</p>
+				</div>
+				<div class="class-card">
+					<i class="fas fa-bicycle"></i>
+					<h3>Spin Class</h3>
+					<p>Indoor cycling for endurance and leg strength.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Pricing Section -->
+	<section id="pricing" class="section-padding">
+		<div class="container">
+			<h2 class="section-title">Membership Plans</h2>
+			<div class="pricing-grid">
+				<div class="price-card">
+					<h3>Basic</h3>
+					<div class="price">Rs.600<span>/mo</span></div>
+					<ul>
+						<li><i class="fas fa-check"></i> Gym Access</li>
+						<li><i class="fas fa-check"></i> Locker Room</li>
+						<li><i class="fas fa-times" style="color: #888;"></i> Group Classes</li>
+					</ul>
+					<button class="btn-outline" onclick="callBasicApi()" >Select Plan</button>
+				</div>
+				<div class="price-card popular">
+					<h3>Pro</h3>
+					<div class="price">Rs.800<span>/mo</span></div>
+					<ul>
+						<li><i class="fas fa-check"></i> 24/7 Gym Access</li>
+						<li><i class="fas fa-check"></i> Free Guest Pass</li>
+						<li><i class="fas fa-check"></i> Group Classes</li>
+					</ul>
+					<button class="btn-main">Select Plan</button>
+				</div>
+				<div class="price-card">
+					<h3>Elite</h3>
+					<div class="price">Rs.1000<span>/mo</span></div>
+					<ul>
+						<li><i class="fas fa-check"></i> All Pro Features</li>
+						<li><i class="fas fa-check"></i> Personal Trainer</li>
+						<li><i class="fas fa-check"></i> Nutrition Plan</li>
+					</ul>
+					<button class="btn-outline">Select Plan</button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Contact Section -->
+
+	<section id="contact" class="section-padding bg-dark">
+		<!-- <div th:switch="${message}">
+			    <div th:case="'Success'" class="alert alert-success">
+			        <strong>Success!</strong> Operation performed successfully.
+			    </div>
+			    <div th:case="'Failed'" class="alert alert-danger">
+			        <strong>Failure!</strong> Operation failed. Please try again 
+			    </div>
+			</div> -->
+		<div class="container">
+			<h2 class="section-title">Get In Touch</h2>
+			<form class="contact-form" action="#">
+				<input type="text" name="name" placeholder="Your Name" required>
+				<input type="text" name="mobile" placeholder="Your mobile" maxlength="10">
+				<input type="email" name="email" placeholder="Your Email" required>
+				<textarea name="message" placeholder="Message" rows="5" maxlength="100"></textarea>
+				<button type="submit" class="btn-main">Send Message</button>
+			</form>
+		</div>
+	</section>
 	
-	<!-- <script>
-	        function callBasicApi() {
-	            // Use the fetch API to make a GET request to your Spring Boot endpoint
-	            fetch('http://localhost:8080/basicPlan')
-	                .then(response => response.text())
-	                .then(data => {
-	                   // alert(data); // Show the response from the server
-	                    console.log(data);
-	                })
-	                .catch(error => {
-	                    console.error('Error calling API:', error);
-	                });
-	        }
-	    </script> -->
+	
+
+	<!-- Footer -->
+	<footer>
+		<div class="container footer-content">
+			<div class="footer-col">
+				<h3>Kerabox Fitness Center</h3>
+				<p>B-78 B-Block Near By Pili Khoti , New Ashok Nagar ,Delhi 110096</p>
+			</div>
+			<div class="footer-col">
+				<div class="socials">
+					<a href="#"><i class="fab fa-facebook"></i></a>
+					<a href="#"><i class="fab fa-instagram"></i></a>
+					<a href="#"><i class="fab fa-twitter"></i></a>
+				</div>
+			</div>
+		</div>
+		<div class="footer-bottom">
+			<p>&copy; 2023 Kerabox Fitness Center Gym. All rights reserved.</p>
+		</div>
+	</footer>
+
+	 <script>
+		// Simple Mobile Navigation Toggle
+		const hamburger = document.querySelector('.hamburger');
+		const navLinks = document.querySelector('.nav-links');
+
+		hamburger.addEventListener('click', () => {
+			navLinks.classList.toggle('active');
+		});
+
+		// Close menu when a link is clicked
+		document.querySelectorAll('.nav-links li a').forEach(link => {
+			link.addEventListener('click', () => {
+				navLinks.classList.remove('active');
+			});
+		});
+	</script>
 
 	<!-- Navigation -->
 	<nav class="navbar">
