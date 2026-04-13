@@ -1771,7 +1771,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="owner-image-container">
                 <div class="owner-image">
 					 <!-- <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Yogi "> -->
-                  <img src="/images/yogi.jpg" alt="Owner - Yogi" onerror="this.src='/images/default.jpg'">
+                 <!--  <img src="/images/yogi.jpg" alt="Owner - Yogi" onerror="this.src='/images/default.jpg'"> -->
                     <div class="image-overlay">
                         <i class="fas fa-dumbbell"></i>
                     </div>
@@ -1913,14 +1913,14 @@ document.addEventListener('DOMContentLoaded', () => {
 	<!-- Contact Section -->
 
 	<section id="contact" class="section-padding bg-dark">
-		<!-- <div th:switch="${message}">
+		<div th:switch="${message}">
 			    <div th:case="'Success'" class="alert alert-success">
 			        <strong>Success!</strong> Operation performed successfully.
 			    </div>
 			    <div th:case="'Failed'" class="alert alert-danger">
 			        <strong>Failure!</strong> Operation failed. Please try again 
 			    </div>
-			</div> -->
+			</div>
 		<div class="container">
 			<h2 class="section-title">Get In Touch</h2>
 			<form class="contact-form" action="#" th:action="@{/save}" th:object="${userMessgae}" method="POST">
